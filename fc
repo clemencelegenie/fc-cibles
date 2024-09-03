@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul de la Zone Brûle-Graisse</title>
+    <script>
+        function calculerFC() {
+            // Récupérer les valeurs entrées par l'utilisateur
+            let sexe = document.getElementById("sexe").value;
+            let age = parseInt(document.getElementById("age").value);
+            let fc_repos = parseInt(document.getElementById("fc_repos").value);
+
+            // Calculer la fréquence cardiaque maximale
+            let fc_max = (sexe === "femme") ? 226 - age : 220 - age;
+
+            // Calculer la fréquence cardiaque de réserve
+            let fc_reserve = fc_max - fc_repos;
+
+            // Calculer la zone brûle-graisse
+            let zone_basse = fc_repos + 0.5 * fc_reserve;
+            let zone_haute = fc_repos + 0.7 * fc_reserve;
+
+            // Afficher les résultats
+            document.getElementById("fc_max_result").innerText = Math.round(fc_max) + " bpm";
+            document.getElementById("zone_result").innerText = Math.round(zone_basse) + " bpm - " + Math.round(zone_haute) + " bpm";
+        }
+    </script>
+</head>
+<body>
+    <h2>Calcul de la Fréquence Cardiaque Maximale et Zone Brûle-Graisse</h2>
+    <form onsubmit="event.preventDefault(); calculerFC();">
+        <label for="sexe">Sexe :</label>
+        <select id="sexe" required>
+            <option value="homme">Homme</option>
+            <option value="femme">Femme</option>
+        </select>
+        <br><br>
+        
+        <label for="age">Âge :</label>
+        <input type="number" id="age" required>
+        <br><br>
+        
+        <label for="fc_repos">Fréquence Cardiaque au Repos (bpm) :</label>
+        <input type="number" id="fc_repos" required>
+        <br><br>
+        
+        <button type="submit">Calculer</button>
+    </form>
+    
+    <h3>Résultats :</h3>
+    <p><strong>Fréquence Cardiaque Maximale (FCM) :</strong> <span id="fc_max_result"></span></p>
+    <p><strong>Zone Brûle-Graisse :</strong> <span id="zone_result"></span></p>
+    
+    <h4>Pourquoi la Zone Brûle-Graisse est-elle Importante ?</h4>
+    <p>
+        La zone brûle-graisse est la plage de fréquence cardiaque dans laquelle ton corps utilise les graisses comme principale source d'énergie. Lorsque tu t'entraînes dans cette zone, ton corps convertit efficacement les graisses stockées en énergie pour alimenter ton effort. 
+    </p>
+    <p>
+        Pour que ce processus soit réellement efficace, il est essentiel de maintenir un effort continu pendant au moins 30 minutes. Plus la durée est longue, plus ton corps puise dans ses réserves de graisses. C'est pourquoi il est important de viser un exercice prolongé, plutôt que de fragmenter l'effort en courtes sessions.
+    </p>
+    <p>
+        Pense à cela comme un "entretien quotidien", tout comme se brosser les dents : ce n'est pas seulement une question de le faire régulièrement, mais aussi de le faire correctement pendant un temps suffisant pour que cela soit efficace.
+    </p>
+</body>
+</html>
